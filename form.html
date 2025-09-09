@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+        body {
+            background-color: #f1f1f1;
+            font-family: sans-serif;
+        }
+        .container {
+            margin-top: 40px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            margin-inline: auto;
+
+            .title {
+                text-align: center;
+                margin-block: 20px;
+            }
+        }
+        form {            
+
+            > div {
+                margin-bottom: 10px;
+            }
+
+            label {
+                display: block;
+                font-size: 12px;
+                font-weight: 600;
+                margin-bottom: 2px;
+            }
+            .input-wrapper {
+                position: relative;
+
+                .success-icon {
+                    position: absolute;
+                    right: 10px;
+                    top: 12px;
+                    width: 15px;
+                    pointer-events: none;
+                    opacity: 0;
+                    transition: .3s;
+                }
+                .angle-down-icon {
+                    position: absolute;
+                    right: 10px;
+                    top: 15px;
+                    pointer-events: none;
+                    opacity: .7;
+                }
+
+                &.valid .success-icon {
+                    opacity: 1;
+                }
+                &.valid .angle-down-icon {
+                    right: 30px;
+                }
+                
+            }
+            select,
+            input {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #dddddd;
+                border-radius: 4px;
+                appearance: none;
+
+                &:focus {
+                    outline: none;
+                    border-color: #c4c4c4;
+                }
+            }
+            
+            input.valid:valid {
+                border-color: rgb(120, 255, 120);
+            }
+
+            .error {
+                margin-top: 2px;
+                font-size: 12px;
+                color: rgb(252, 64, 64);
+            }
+            .hint {
+                font-size: 12px;
+                color: #b9b9b9;
+            }
+            .password-validation-list {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: none;
+
+
+                li {
+                    font-size: 12px;
+                    color: gray;
+
+                    &.valid-password {
+                        color: #33be33;
+                    }
+                }
+            }
+            
+            
+            button {
+                display: block;
+                padding: 10px 40px;
+                background-color: #00aeff;
+                border: 1px solid #00aeff;
+                border-radius: 4px;
+                cursor: pointer;
+                font-weight: 600;
+                color: #ffffff;
+
+            }
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="title">Sign up Form</h2>
+        <form novalidate>
+            <div>
+                <label>Email</label>
+                <div class="input-wrapper">
+                    <input type="email" id="email-input" required>
+                    <img class="success-icon" src="https://www.freeiconspng.com/thumbs/success-icon/success-icon-10.png" alt="">
+                </div>
+                <p class="error"></p>
+            </div>
+            <div>
+                <label>Country</label>
+                <div class="input-wrapper">
+                    <select name="" id="country-select" required>
+                        <option value="" disabled selected>Please select a country</option>
+                        <option value="IN">India</option>
+                        <option value="US">USA</option>
+                        <option value="AU">Australia</option>
+                        <option value="FR">France</option>
+                        <option value="CA">Canada</option>
+                    </select>
+                    <img class="angle-down-icon" src="../images/angle-down-black.png" alt="">
+                    <img class="success-icon" src="https://www.freeiconspng.com/thumbs/success-icon/success-icon-10.png" alt="">
+                    
+                </div>
+                
+                <p class="error"></p>
+                
+            </div>
+            <div>
+                <label>Postal Code</label>
+                <div class="input-wrapper">
+                    <input type="text" name="" id="postal-code-input" required>
+                    <img class="success-icon" src="https://www.freeiconspng.com/thumbs/success-icon/success-icon-10.png" alt="">
+                </div>
+                <p class="error"></p>
+                <p class="hint"></p>
+            </div>
+            <div>
+                <label>Password</label>
+                <div class="input-wrapper">
+                    <input type="password" name="" id="password-input" required>
+                    <img class="success-icon" src="https://www.freeiconspng.com/thumbs/success-icon/success-icon-10.png" alt="">
+                </div>            
+                <p class="error"></p>
+                <ul class="password-validation-list">
+                    <li class="eight-characters">At least 8 characters</li>
+                    <li class="uppercase">At least 1 uppercase letter</li>
+                    <li class="lowercase">At least 1 lowercase letter</li>
+                    <li class="number">At least 1 number</li>
+                    <li class="special-character">At least 1 special character</li>
+                </ul>
+            </div>
+            <div>
+                <label>Confirm Password</label>
+                <div class="input-wrapper">
+                    <input type="password" name="" id="confirm-password-input" required>
+                    <img class="success-icon" src="https://www.freeiconspng.com/thumbs/success-icon/success-icon-10.png" alt="">
+                </div>
+                
+                <p class="error"></p>
+            </div>
+            <div>
+                <button>Sign up</button>
+            </div>
+        </form>
+    </div>
+    
+
+    <script>
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector("form");
+            const emailInput = document.querySelector("#email-input");
+            const countrySelect = document.querySelector("#country-select");
+            const postalCodeInput = document.querySelector("#postal-code-input");
+            const passwordInput = document.querySelector("#password-input");
+            const confirmPasswordInput = document.querySelector("#confirm-password-input");
+            const hintBox = document.querySelector(".hint");
+            let posCodeObj = "";
+
+            function onSelectCountry(elem) {
+                postalCodeInput.value = "";
+                postalCodeInput.parentElement.classList.remove("valid");
+                const postalCodesObj = {
+                    IN: "^\\d{6}$",
+                    US: "^\\d{5}$",
+                    AU: "^\\d{4}$",
+                    FR: "^\\d{5}$",
+                    CA: "^[ABCEGHJ-NPRSTVXY]\\d[ABCEGHJ-NPRSTV-Z][ ]?\\d[ABCEGHJ-NPRSTV-Z]\\d$"
+                }
+                const postalHintsObj = {
+                    IN: "India PIN code (6 digits).",
+                    US: "US ZIP code (e.g., 12345).",
+                    AU: "Australia post code (4 digits).",
+                    FR: "French postal code (5 digits).",
+                    CA: "Canadian postal code (A1A 1A1)."
+                }
+
+                if (postalCodesObj[elem.value]) {
+                    console.log(postalCodesObj[elem.value])
+                    postalCodeInput.setAttribute("pattern", postalCodesObj[elem.value]);
+                    hintBox.textContent = postalHintsObj[elem.value];
+                }
+            };
+
+            function checkPasswordValue(value) {
+                return {
+                    length: value.length >= 8,
+                    upper: /[A-Z]/.test(value),
+                    lower: /[a-z]/.test(value),
+                    num: /\d/.test(value),
+                    special: /[^A-Za-z0-9]/.test(value)
+                }
+            }
+
+            function validatePassword(elem) {
+                const value = elem.value;
+                const checkValue = checkPasswordValue(value);
+                
+                if (checkValue.length) {
+                    document.querySelector(".eight-characters").classList.add("valid-password");
+                } else {
+                    document.querySelector(".eight-characters").classList.remove("valid-password");
+                }
+                if (checkValue.upper) {
+                    document.querySelector(".uppercase").classList.add("valid-password");
+                } else {
+                    document.querySelector(".uppercase").classList.remove("valid-password");
+                }
+                if (checkValue.lower) {
+                    document.querySelector(".lowercase").classList.add("valid-password");
+                } else {
+                    document.querySelector(".lowercase").classList.remove("valid-password");
+                }
+                if (checkValue.num) {
+                    document.querySelector(".number").classList.add("valid-password");
+                } else {
+                    document.querySelector(".number").classList.remove("valid-password");
+                }
+                if (checkValue.special) {
+                    document.querySelector(".special-character").classList.add("valid-password");
+                } else {
+                    document.querySelector(".special-character").classList.remove("valid-password");
+                }
+
+                confirmPasswordInput.setAttribute("pattern", elem.value);
+                
+                
+            }
+
+            function matchPassword(elem) {
+                if (elem.value !== passwordInput.value) {
+                    elem.parentElement.nextElementSibling.textContent = "Passwords do not match."
+                }
+            }
+            
+
+            function validateInput(inputElement) {
+                    const errorBox = inputElement.parentElement.nextElementSibling;
+                    const inputWrapper = inputElement.parentElement;
+                
+                    if (inputElement.validity.valueMissing) {
+                        if (inputElement.id == "email-input") {
+                            errorBox.textContent = "Please enter a valid email address."
+                        }
+                    }
+
+                    if (inputElement.id == "country-select") {
+                        onSelectCountry(inputElement);
+                        
+                        
+                    }
+                    if (inputElement.id == "postal-code-input") {
+                        errorBox.textContent = "Please enter a valid postal code."
+                    }
+                    if (inputElement.id == "password-input") {
+                        errorBox.textContent = "Please enter a valid password."
+                    }
+                    if (inputElement.id == "confirm-password-input") {
+                        errorBox.textContent = "Please confirm the password."
+                    }
+                    
+                    if (inputElement.validity.typeMismatch) {
+                        if (inputElement.id == "email-input") {
+                            errorBox.textContent = "Entered vlaue is not a valid email address."
+                        }
+
+                        if (inputElement.id == "postal-code-input") {
+                            errorBox.textContent = "Please enter a valid postal code."
+                        }
+                        
+                    }
+
+                    if (inputElement.validity.valid) {
+                        inputWrapper.classList.add("valid");
+                        errorBox.textContent = "";
+                    }
+                    if (!inputElement.validity.valid) {
+                        inputWrapper.classList.remove("valid"); 
+                    }
+
+                    if (inputElement.id == "password-input") {
+                        validatePassword(inputElement);
+                    }
+                    if (inputElement.id == "confirm-password-input") {
+                        matchPassword(inputElement);
+                    }
+                    
+
+                }
+
+                function validateFormOnSubmit(input) {
+                    if (input.validity.valueMissing) {
+                        if (input.id == "email-input") {
+                            input.parentElement.nextElementSibling.textContent = "Please enter a valid email address."
+                        }
+                        if (input.id == "country-select") {
+                            input.parentElement.nextElementSibling.textContent = "Please select a country."
+
+                        }
+                        if (input.id == "postal-code-input") {
+                            input.parentElement.nextElementSibling.textContent = "Please enter a valid postal code."
+                        }
+                        if (input.id == "password-input") {
+                            input.parentElement.nextElementSibling.textContent = "Please enter a valid password."
+                        }
+                        if (input.id == "confirm-password-input") {
+                            input.parentElement.nextElementSibling.textContent = "Please confirm the password."
+                        }
+                    }
+                }
+
+            [emailInput, countrySelect, postalCodeInput, passwordInput, confirmPasswordInput].forEach(function(inputElement) {
+                inputElement.addEventListener("input", function() {
+                    validateInput(inputElement);
+                });
+
+                form.addEventListener("submit", function(e) {
+                    e.preventDefault();
+                    validateFormOnSubmit(inputElement);
+                })
+            });
+
+            form.addEventListener("submit", function(e) {
+                e.preventDefault();
+                if (form.checkValidity()) {
+                    alert("Form submitted successfully");
+                }
+            })
+            passwordInput.addEventListener("focus", function() {
+                this.parentElement.nextElementSibling.nextElementSibling.style.display = "block";
+            })
+            
+        });
+
+        
+
+        
+        
+    </script>
+</body>
+</html>
