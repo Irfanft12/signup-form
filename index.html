@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sign up Form</title>
     <style>
         * {
             box-sizing: border-box;
@@ -171,7 +171,7 @@
             <div>
                 <label>Password</label>
                 <div class="input-wrapper">
-                    <input type="password" name="" id="password-input" required>
+                    <input type="password" name="" id="password-input" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
                     <img class="success-icon" src="https://www.freeiconspng.com/thumbs/success-icon/success-icon-10.png" alt="">
                 </div>            
                 <p class="error"></p>
@@ -299,16 +299,18 @@
                     }
 
                     if (inputElement.id == "country-select") {
-                        onSelectCountry(inputElement);
-                        
-                        
+                        onSelectCountry(inputElement);                        
                     }
+
                     if (inputElement.id == "postal-code-input") {
                         errorBox.textContent = "Please enter a valid postal code."
                     }
+
                     if (inputElement.id == "password-input") {
                         errorBox.textContent = "Please enter a valid password."
+                        confirmPasswordInput.value = "";
                     }
+
                     if (inputElement.id == "confirm-password-input") {
                         errorBox.textContent = "Please confirm the password."
                     }
